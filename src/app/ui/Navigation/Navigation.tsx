@@ -11,6 +11,7 @@ const NavigationWrapper = styled.nav<{ isShowNavigation: boolean }>`
     top: 0;
     left: 0;
     z-index: 3;
+    background-color: ${theme.colors.smokeWhite};
     width: 100%;
     height: 100%;
     display: flex;
@@ -26,13 +27,17 @@ const NavigationWrapper = styled.nav<{ isShowNavigation: boolean }>`
   `}
 `;
 
+const SidePanel = styled.div`
+  padding: 20px;
+  height: 100%;
+  background-color: ${({ theme }) => theme.colors.lightGrey};
+  display: flex;
+  align-items: start;
+`
+
 const IconCloseWrapper = styled.div<{ isShowNavigation: boolean }>`
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  
-  padding: 15px;
-  border: 3px solid pink;
+  background-color: ${({ theme }) => theme.colors.veryLightGrey};
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -50,7 +55,7 @@ const IconCloseWrapper = styled.div<{ isShowNavigation: boolean }>`
 const IconClose = styled(IoMdClose)`
   
   border-radius: 50%;
-  
+  background-color: ${({ theme }) => theme.colors.smokeWhite};
   padding: 2px;
   height: 100%;
 `;
@@ -65,14 +70,14 @@ const MenuElement = styled.li`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  
+  color: ${({ theme }) => theme.colors.text};
   margin-bottom: 10px;
   &::after {
     content: '';
     display: block;
     width: 0;
     height: 2px;
-     
+    background-color: ${({ theme }) => theme.colors.text}; 
     transition: width .25s;
   }
   &:hover::after {
@@ -110,11 +115,13 @@ export const Navigation = () =>  {
         isShowNavigation = {navbarOpen}
         onClick={toggleNavbar}
       >
-        <IconCloseWrapper  
-          isShowNavigation = {navbarOpen} 
-          onClick={ toggleNavbar }>
-        <IconClose />
-        </IconCloseWrapper>
+        <SidePanel>
+          <IconCloseWrapper  
+            isShowNavigation = {navbarOpen} 
+            onClick={ toggleNavbar }>
+            <IconClose />
+          </IconCloseWrapper>
+        </SidePanel>
         <div style={{ padding: '50px', width: '95%', marginLeft: 'auto' }}>
           <ul style={{  width: '25%' }}>
             <MenuElement>
