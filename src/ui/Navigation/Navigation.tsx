@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
-import { useToggleNavbar } from '@/app/hooks/useNavbar';
+import { useToggleNavbar } from '@/hooks/useNavbar';
 import styled from 'styled-components';
 
 const NavigationWrapper = styled.nav<{ isShowNavigation: boolean }>`
