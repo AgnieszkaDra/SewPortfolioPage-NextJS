@@ -18,7 +18,7 @@ export default function Home() {
     .then(json => setProductsInfo(json))
   }, [])
 
-  const categoriesNames = [...new Set(productsInfo.map(p => p.name))]
+  const categoriesNames = Array.isArray(productsInfo) ? [...new Set(productsInfo.map(p => p.name))] : [];
 
   return (
     <ThemeProvider theme={theme}>
