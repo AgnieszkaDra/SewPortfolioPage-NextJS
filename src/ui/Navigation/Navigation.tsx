@@ -4,9 +4,9 @@ import { IoMdClose } from "react-icons/io";
 import { useToggleNavbar } from '@/hooks/useNavbar';
 import styled from 'styled-components';
 
-const NavigationWrapper = styled.nav<{ isShowNavigation: boolean }>`
-  ${({ isShowNavigation, theme }) =>
-    isShowNavigation && `
+const NavigationWrapper = styled.nav<{ isnavigation: boolean }>`
+  ${({ isnavigation, theme }) =>
+    isnavigation && `
     position: fixed;
     top: 0;
     left: 0;
@@ -20,8 +20,8 @@ const NavigationWrapper = styled.nav<{ isShowNavigation: boolean }>`
       flex-direction: column;
     }
   `}
-  ${({ isShowNavigation }) =>
-    !isShowNavigation && `
+  ${({ isnavigation }) =>
+    !isnavigation && `
     display: none;
     }
   `}
@@ -35,7 +35,7 @@ const SidePanel = styled.div`
   align-items: start;
 `
 
-const IconCloseWrapper = styled.div<{ isShowNavigation: boolean }>`
+const IconCloseWrapper = styled.div<{ isnavigation: boolean }>`
   background-color: ${({ theme }) => theme.colors.veryLightGrey};
   border-radius: 50%;
   display: flex;
@@ -45,8 +45,8 @@ const IconCloseWrapper = styled.div<{ isShowNavigation: boolean }>`
     width:100%;
     height: 100%;
   }
-  ${({ isShowNavigation }) =>
-  !isShowNavigation && `
+  ${({ isnavigation }) =>
+  !isnavigation && `
   display: none;
   }
 `}
@@ -85,9 +85,9 @@ const StyledLink = styled(Link)`
   } 
 `;
 
-const HamburgerWrapper = styled.div<{ isShowNavigation: boolean }>`
-  ${({ isShowNavigation }) =>
-    isShowNavigation && `
+const HamburgerWrapper = styled.div<{ isnavigation: boolean }>`
+  ${({ isnavigation }) =>
+    isnavigation && `
     display: none;
     }
   `}
@@ -112,12 +112,12 @@ export const Navigation = () =>  {
   return (
     <>
       <NavigationWrapper
-        isShowNavigation = {navbarOpen}
+        isnavigation = {navbarOpen}
         onClick={toggleNavbar}
       >
         <SidePanel>
           <IconCloseWrapper  
-            isShowNavigation = {navbarOpen} 
+            isnavigation = {navbarOpen} 
             onClick={ toggleNavbar }>
             <IconClose />
           </IconCloseWrapper>
@@ -137,7 +137,7 @@ export const Navigation = () =>  {
         </div>
       </NavigationWrapper>
       <HamburgerWrapper 
-        isShowNavigation = {navbarOpen} 
+        isnavigation = {navbarOpen} 
         onClick={toggleNavbar}
       >
         <GiHamburgerMenu />
