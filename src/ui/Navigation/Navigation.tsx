@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const NavigationWrapper = styled.nav<{ isnavigation: boolean }>`
   ${({ isnavigation, theme }) =>
-    isnavigation && `
+    isnavigation ? `
     position: fixed;
     top: 0;
     left: 0;
@@ -19,7 +19,7 @@ const NavigationWrapper = styled.nav<{ isnavigation: boolean }>`
     @media screen and (max-width: 575px) {
       flex-direction: column;
     }
-  `}
+  ` : undefined}
   ${({ isnavigation }) =>
     !isnavigation && `
     display: none;
@@ -46,10 +46,10 @@ const IconCloseWrapper = styled.div<{ isnavigation: boolean }>`
     height: 100%;
   }
   ${({ isnavigation }) =>
-  !isnavigation && `
+  !isnavigation ? `
   display: none;
   }
-`}
+`: undefined}
 `;
 
 const IconClose = styled(IoMdClose)`
@@ -87,10 +87,10 @@ const StyledLink = styled(Link)`
 
 const HamburgerWrapper = styled.div<{ isnavigation: boolean }>`
   ${({ isnavigation }) =>
-    isnavigation && `
+    isnavigation ? `
     display: none;
     }
-  `}
+  `: undefined}
   height: 26px;
   width: 32px;
   position: absolute;
