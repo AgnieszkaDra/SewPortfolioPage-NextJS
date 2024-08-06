@@ -4,9 +4,10 @@ import { IoMdClose } from "react-icons/io";
 import { useToggleNavbar } from '@/hooks/useNavbar';
 import styled from 'styled-components';
 
-const NavigationWrapper = styled.nav<{ isShowNavigation: boolean }>`
-  ${({ isShowNavigation, theme }) =>
-    isShowNavigation && `
+// Styled-components usage
+const NavigationWrapper = styled.nav<{ isnavigation: boolean }>`
+  ${({ isnavigation, theme }) =>
+    isnavigation ? `
     position: fixed;
     top: 0;
     left: 0;
@@ -19,11 +20,8 @@ const NavigationWrapper = styled.nav<{ isShowNavigation: boolean }>`
     @media screen and (max-width: 575px) {
       flex-direction: column;
     }
-  `}
-  ${({ isShowNavigation }) =>
-    !isShowNavigation && `
+  ` : `
     display: none;
-    }
   `}
 `;
 
@@ -33,27 +31,27 @@ const SidePanel = styled.div`
   background-color: ${({ theme }) => theme.colors.lightGrey};
   display: flex;
   align-items: start;
-`
+`;
 
-const IconCloseWrapper = styled.div<{ isShowNavigation: boolean }>`
+const IconCloseWrapper = styled.div<{ isnavigation: boolean }>`
   background-color: ${({ theme }) => theme.colors.veryLightGrey};
   border-radius: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   svg {
-    width:100%;
+    width: 100%;
     height: 100%;
   }
-  ${({ isShowNavigation }) =>
-  !isShowNavigation && `
-  display: none;
-  }
-`}
+  ${({ isnavigation }) =>
+    isnavigation ? `
+    display: flex;
+  ` : `
+    display: none;
+  `}
 `;
 
 const IconClose = styled(IoMdClose)`
-  
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.smokeWhite};
   padding: 2px;
@@ -85,11 +83,12 @@ const StyledLink = styled(Link)`
   } 
 `;
 
-const HamburgerWrapper = styled.div<{ isShowNavigation: boolean }>`
-  ${({ isShowNavigation }) =>
-    isShowNavigation && `
+const HamburgerWrapper = styled.div<{ isnavigation: boolean }>`
+  ${({ isnavigation }) =>
+    isnavigation ? `
     display: none;
-    }
+  ` : `
+    display: flex;
   `}
   height: 26px;
   width: 32px;
@@ -100,30 +99,25 @@ const HamburgerWrapper = styled.div<{ isShowNavigation: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   svg {
-    width:100%;
+    width: 100%;
     height: 100%;
     z-index: 3;
   }
 `;
 
-export const Navigation = () =>  {
+export const Navigation = () => {
   const { navbarOpen, toggleNavbar } = useToggleNavbar();
- 
+
   return (
     <>
-      <NavigationWrapper
-        isShowNavigation = {navbarOpen}
-        onClick={toggleNavbar}
-      >
+      <NavigationWrapper isnavigation={navbarOpen} onClick={toggleNavbar}>
         <SidePanel>
-          <IconCloseWrapper  
-            isShowNavigation = {navbarOpen} 
-            onClick={ toggleNavbar }>
+          <IconCloseWrapper isnavigation={navbarOpen} onClick={toggleNavbar}>
             <IconClose />
           </IconCloseWrapper>
         </SidePanel>
         <div style={{ padding: '50px', width: '95%', marginLeft: 'auto' }}>
-          <ul style={{  width: '25%' }}>
+          <ul style={{ width: '25%' }}>
             <MenuElement>
               <StyledLink href={'/'}>Strona główna</StyledLink>
             </MenuElement>
@@ -136,14 +130,11 @@ export const Navigation = () =>  {
           </ul>
         </div>
       </NavigationWrapper>
-      <HamburgerWrapper 
-        isShowNavigation = {navbarOpen} 
-        onClick={toggleNavbar}
-      >
+      <HamburgerWrapper isnavigation={navbarOpen} onClick={toggleNavbar}>
         <GiHamburgerMenu />
       </HamburgerWrapper>
     </>
-)
-}
+  );
+};
 
-export default Navigation
+export default Navigation;
