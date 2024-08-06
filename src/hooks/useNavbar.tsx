@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 
 export const useToggleNavbar = () => {
-  const [navbarOpen, setNavbarOpen] = useState(false)
+  const [navbarOpen, setNavbarOpen] = useState<boolean>(false)
 
     const toggleNavbar = () => {
     setNavbarOpen(!navbarOpen);

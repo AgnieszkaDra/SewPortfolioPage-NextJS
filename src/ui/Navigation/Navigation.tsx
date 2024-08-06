@@ -4,6 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import { useToggleNavbar } from '@/hooks/useNavbar';
 import styled from 'styled-components';
 
+// Styled-components usage
 const NavigationWrapper = styled.nav<{ isnavigation: boolean }>`
   ${({ isnavigation, theme }) =>
     isnavigation ? `
@@ -19,11 +20,8 @@ const NavigationWrapper = styled.nav<{ isnavigation: boolean }>`
     @media screen and (max-width: 575px) {
       flex-direction: column;
     }
-  ` : undefined}
-  ${({ isnavigation }) =>
-    !isnavigation && `
+  ` : `
     display: none;
-    }
   `}
 `;
 
@@ -33,7 +31,7 @@ const SidePanel = styled.div`
   background-color: ${({ theme }) => theme.colors.lightGrey};
   display: flex;
   align-items: start;
-`
+`;
 
 const IconCloseWrapper = styled.div<{ isnavigation: boolean }>`
   background-color: ${({ theme }) => theme.colors.veryLightGrey};
@@ -42,18 +40,18 @@ const IconCloseWrapper = styled.div<{ isnavigation: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   svg {
-    width:100%;
+    width: 100%;
     height: 100%;
   }
   ${({ isnavigation }) =>
-  !isnavigation ? `
-  display: none;
-  }
-`: undefined}
+    isnavigation ? `
+    display: flex;
+  ` : `
+    display: none;
+  `}
 `;
 
 const IconClose = styled(IoMdClose)`
-  
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.smokeWhite};
   padding: 2px;
@@ -89,8 +87,9 @@ const HamburgerWrapper = styled.div<{ isnavigation: boolean }>`
   ${({ isnavigation }) =>
     isnavigation ? `
     display: none;
-    }
-  `: undefined}
+  ` : `
+    display: flex;
+  `}
   height: 26px;
   width: 32px;
   position: absolute;
@@ -100,30 +99,25 @@ const HamburgerWrapper = styled.div<{ isnavigation: boolean }>`
   flex-direction: column;
   justify-content: space-between;
   svg {
-    width:100%;
+    width: 100%;
     height: 100%;
     z-index: 3;
   }
 `;
 
-export const Navigation = () =>  {
+export const Navigation = () => {
   const { navbarOpen, toggleNavbar } = useToggleNavbar();
- 
+
   return (
     <>
-      <NavigationWrapper
-        isnavigation = {navbarOpen}
-        onClick={toggleNavbar}
-      >
+      <NavigationWrapper isnavigation={navbarOpen} onClick={toggleNavbar}>
         <SidePanel>
-          <IconCloseWrapper  
-            isnavigation = {navbarOpen} 
-            onClick={ toggleNavbar }>
+          <IconCloseWrapper isnavigation={navbarOpen} onClick={toggleNavbar}>
             <IconClose />
           </IconCloseWrapper>
         </SidePanel>
         <div style={{ padding: '50px', width: '95%', marginLeft: 'auto' }}>
-          <ul style={{  width: '25%' }}>
+          <ul style={{ width: '25%' }}>
             <MenuElement>
               <StyledLink href={'/'}>Strona główna</StyledLink>
             </MenuElement>
@@ -136,14 +130,11 @@ export const Navigation = () =>  {
           </ul>
         </div>
       </NavigationWrapper>
-      <HamburgerWrapper 
-        isnavigation = {navbarOpen} 
-        onClick={toggleNavbar}
-      >
+      <HamburgerWrapper isnavigation={navbarOpen} onClick={toggleNavbar}>
         <GiHamburgerMenu />
       </HamburgerWrapper>
     </>
-)
-}
+  );
+};
 
-export default Navigation
+export default Navigation;
